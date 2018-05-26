@@ -1,0 +1,34 @@
+{
+  "name": "flow-checker",
+  "version": "0.1.0",
+  "description": "A better flow cli with ignoring files from node_modules",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "rimraf bin/",
+    "build": "babel src -d bin",
+    "flow": "babel-node src/flow-check.js",
+    "prepare": "yarn run build"
+  },
+  "bin": {
+    "flow-check": "./bin/flow-check.js"
+  },
+  "peerDependencies": {
+    "flow-bin": "^0.65.0"
+  },
+  "dependencies": {
+    "execa": "0.10.0",
+    "ora": "2.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.0.0-beta.49",
+    "@babel/core": "7.0.0-beta.49",
+    "@babel/node": "7.0.0-beta.49",
+    "@babel/preset-env": "7.0.0-beta.49",
+    "@babel/preset-flow": "7.0.0-beta.49",
+    "eslint": "4.19.1",
+    "eslint-config-henribeck": "4.19.6",
+    "flow-bin": "0.73.0",
+    "rimraf": "2.6.2"
+  }
+}
