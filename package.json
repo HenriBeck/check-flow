@@ -1,23 +1,26 @@
 {
   "name": "flow-checker",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "A better flow cli with ignoring files from node_modules",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf bin/",
-    "build": "babel src -d bin",
+    "prebuild": "rimraf dist/",
+    "build": "babel src -d dist",
     "flow": "babel-node src/flow-check.js",
+    "lint": "eslint src/",
     "prepare": "yarn run build"
   },
+  "files": [
+    "dist/",
+    "bin/",
+    "README.md",
+    "LICENSE"
+  ],
   "bin": {
-    "flow-check": "./bin/flow-check.js"
-  },
-  "peerDependencies": {
-    "flow-bin": "^0.65.0"
+    "flow-check": "./bin/index.js"
   },
   "dependencies": {
-    "execa": "0.10.0",
     "ora": "2.1.0"
   },
   "devDependencies": {
