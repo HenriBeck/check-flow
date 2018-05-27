@@ -1,0 +1,50 @@
+version: 2
+
+jobs:
+  lint:
+    working_directory: ~/flow-checker
+    docker:
+      - image: circleci/node:8@sha256:af0ffb60afc34736f30fd8ce6662175ca29009835308fb7786e27ecfce424f20
+    steps:
+      - checkout
+      - run:
+          name: Install Packages
+          command: yarn install
+      - run:
+          name: Lint
+          command: yarn run lint
+
+  flow:
+    working_directory: ~/flow-checker
+    docker:
+      - image: circleci/node:8@sha256:af0ffb60afc34736f30fd8ce6662175ca29009835308fb7786e27ecfce424f20
+    steps:
+      - checkout
+      - run:
+          name: Install Packages
+          command: yarn install
+      - run:
+          name: Lint
+          command: yarn run flow
+
+  build:
+    working_directory: ~/flow-checker
+    docker:
+      - image: circleci/node:8@sha256:af0ffb60afc34736f30fd8ce6662175ca29009835308fb7786e27ecfce424f20
+    steps:
+      - checkout
+      - run:
+          name: Install Packages
+          command: yarn install
+      - run:
+          name: Build
+          command: yarn run build
+
+workflows:
+  version: 2
+
+  test:
+    jobs:
+      - lint
+      - flow
+      - build
