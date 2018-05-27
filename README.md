@@ -1,4 +1,7 @@
 # flow-checker
+
+[![npm](https://img.shields.io/npm/v/flow-checker.svg)](https://www.npmjs.com/package/flow-checker) ![Maintenance](https://img.shields.io/maintenance/yes/2018.svg) ![npm](https://img.shields.io/npm/l/flow-checker.svg) ![David](https://img.shields.io/david/HenriBeck/flow-checker.svg) [![CircleCI](https://circleci.com/gh/HenriBeck/flow-checker.svg?style=svg)](https://circleci.com/gh/HenriBeck/flow-checker)
+
 A better flow cli with ignoring errors from files which are in `node_modules` folder.
 
 ## Installation
