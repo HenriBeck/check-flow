@@ -2,7 +2,7 @@
 
 import { execFile } from 'child_process';
 import ora from 'ora';
-import flow from 'flow-bin';
+import flow from 'flow-bin'; // eslint-disable-line import/no-extraneous-dependencies
 
 const spinner = ora('Running flow');
 
@@ -68,6 +68,7 @@ class Parser {
 
 const parser = new Parser();
 
+// eslint-disable-next-line promise/prefer-await-to-callbacks, handle-callback-err
 execFile(flow, ['check', '--color=always'], (err, stdout) => {
   spinner.stop();
 
