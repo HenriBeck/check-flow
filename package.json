@@ -5,14 +5,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf dist/",
-    "build": "babel src -d dist",
-    "flow": "babel-node src/flow-check.js",
+    "prebuild": "rimraf bin/",
+    "build": "babel src -d bin",
+    "flow": "yarn run build && node bin/index.js",
     "lint": "eslint src/",
     "prepare": "yarn run build"
   },
   "files": [
-    "dist/",
     "bin/",
     "README.md",
     "LICENSE"
@@ -21,7 +20,9 @@
     "flow-check": "./bin/index.js"
   },
   "dependencies": {
-    "ora": "2.1.0"
+    "minimatch": "3.0.4",
+    "ora": "2.1.0",
+    "yargs": "11.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.49",
