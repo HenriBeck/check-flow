@@ -1,69 +1,14 @@
 // @flow strict-local
 
-import minimatch from 'minimatch';
 import { execFile } from 'child_process';
 import ora from 'ora';
-import flow from 'flow-bin'; // eslint-disable-line import/no-extraneous-dependencies
 
-const spinner = ora('Running flow');
+import Parser from './parser';
 
-class Parser {
-  static appendLine(errors, line) {
-    return errors.map((error, index) => {
-      if (index === errors.length - 1) {
-        return `${error}\n${line}`;
-      }
+export default function runFlow(flow: string, ignoreFiles: $ReadOnlyArray<string>) {
+  const spinner = ora('Running flow');
+  const parser = new Parser(ignoreFiles);
 
-      return error;
-    });
-  }
-
-  ignoreNextLines: boolean;
-
-  constructor() {
-    this.ignoreNextLines = false;
-  }
-
-  filterErrors(stdout, ignoreFiles) {
-    const lines = stdout.split('\n');
-
-    return lines.reduce((errors, line) => {
-      if (/Found \d+ errors?/.test(line)) {
-        return this.handleErrorFoundCountLine(errors);
-      } else if (/Error -+/.test(line)) {
-        return this.handleNewErrorLine(errors, line, ignoreFiles);
-      }
-
-      return this.handleLine(errors, line);
-    }, []);
-  }
-
-  handleNewErrorLine(errors, line, ignoreFiles) {
-    const [, filePath] = line.match(/Error -+ (.+)/);
-    const shouldBeIgnored = ignoreFiles.some(glob => minimatch(filePath, glob));
-
-    this.ignoreNextLines = shouldBeIgnored;
-
-    return shouldBeIgnored ? errors : [
-      ...errors,
-      line,
-    ];
-  }
-
-  handleErrorFoundCountLine(errors) {
-    this.ignoreNextLines = true;
-
-    return errors;
-  }
-
-  handleLine(errors, line) {
-    return this.ignoreNextLines ? errors : Parser.appendLine(errors, line);
-  }
-}
-
-const parser = new Parser();
-
-export default function runFlow(ignoreFiles: $ReadOnlyArray<string>) {
   // Empty line between command and spinner
   console.log('');
 
@@ -73,15 +18,19 @@ export default function runFlow(ignoreFiles: $ReadOnlyArray<string>) {
   execFile(flow, ['check', '--color=always'], (err, stdout) => {
     spinner.stop();
 
-    const filteredErrors = parser.filterErrors(stdout, ignoreFiles);
+    // Filter the errors from the stdout
+    const filteredErrors = parser.filterErrors(stdout);
     const errorsCount = filteredErrors.length;
 
+    // If we have errors, log them out
     if (filteredErrors.length > 0) {
       console.log(filteredErrors.join('\n'));
     }
 
+    // Output the actual error count
     console.log(`Found ${errorsCount} error${errorsCount === 1 ? '' : 's'}\n`);
 
+    // End the process when we have more than one error with an error code
     if (filteredErrors.length > 0) {
       process.exit(2); // eslint-disable-line unicorn/no-process-exit
     }
