@@ -36,6 +36,6 @@
     "rimraf": "2.6.2"
   },
   "peerDependencies": {
-    "flow-bin": "^0.65.0"
+    "flow-bin": "^0.73.0"
   }
 }
