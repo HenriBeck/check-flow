@@ -11,8 +11,6 @@ type Options = {|
 |};
 
 export default function runFlow(flow: string, options: Options) {
-  console.log(options);
-
   // eslint-disable-next-line promise/avoid-new
   return new Promise((resolve, reject) => {
     const parser = new Parser(options.ignoreFiles);

@@ -59,7 +59,9 @@ export default class Parser {
       if (/Found \d+ errors?/.test(line)) {
         return this.handleErrorFoundCountLine(errors);
       } else if (/Error -+/.test(line)) {
-        return this.handleNewErrorLine(errors, line);
+        return this.handleNewErrorLine(errors, line, /Error -+ (.+):\d+:\d+$/);
+      } else if (/Error: /.test(line)) {
+        return this.handleNewErrorLine(errors, line, /Error: (.+):\d+$/);
       }
 
       return this.handleLine(errors, line);
@@ -75,8 +77,8 @@ export default class Parser {
    * @param {String} line - The currently processed line.
    * @returns {String[]} - Returns a new array of errors.
    */
-  handleNewErrorLine(errors: $ReadOnlyArray<string>, line: string) {
-    const matches = line.match(/Error -+ (.+):\d+:\d+/);
+  handleNewErrorLine(errors: $ReadOnlyArray<string>, line: string, regex: RegExp) {
+    const matches = line.match(regex);
 
     if (!matches) {
       return [

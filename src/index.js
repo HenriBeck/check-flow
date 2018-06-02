@@ -15,6 +15,7 @@ const argv = yargs
 const spinner = ora('Running flow');
 
 // Empty line between command and spinner
+// eslint-disable-next-line no-console
 console.log('');
 
 spinner.start();
@@ -30,6 +31,7 @@ runFlow(flow, {
   .then((output) => { // eslint-disable-line promise/prefer-await-to-then
     spinner.stop();
 
+    // eslint-disable-next-line no-console
     console.log(output);
 
     return null;
@@ -37,6 +39,7 @@ runFlow(flow, {
   .catch((error) => {
     spinner.stop();
 
+    // eslint-disable-next-line no-console
     console.log(error);
 
     // End the process when we have more than one error with an error code
