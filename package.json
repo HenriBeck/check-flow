@@ -9,7 +9,7 @@
     "prebuild": "rimraf bin/",
     "build": "babel src -d bin",
     "preflow": "yarn run build",
-    "flow": "node bin/index.js --i=\"node_modules/**/*,tests/flow-test-files/*\" --color=always",
+    "flow": "node bin/index.js --i=\"node_modules/**/*\" --color=always",
     "lint": "eslint src/ tests/",
     "prepare": "yarn run build"
   },
