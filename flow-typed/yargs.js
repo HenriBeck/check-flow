@@ -1,5 +1,5 @@
 declare module 'yargs' {
   declare export default {
-    argv: Object,
+    argv: { [key: string]: string },
   };
 }
