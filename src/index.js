@@ -7,8 +7,11 @@ import ora from 'ora';
 
 import runFlow from './run-flow';
 
-const argv = yargs.argv;
-const ignoreFiles = argv.ignore ? argv.ignore.split(',') : ['node_modules/**/*'];
+const argv = yargs
+  .option('ignore', {
+    alias: 'i',
+    default: 'node_modules/**/*',
+  }).argv;
 const spinner = ora('Running flow');
 
 // Empty line between command and spinner
@@ -16,7 +19,14 @@ console.log('');
 
 spinner.start();
 
-runFlow(flow, ignoreFiles)
+runFlow(flow, {
+  ignoreFiles: argv.ignore.split(','),
+  options: process.argv
+    .slice(2)
+    .filter(arg => /^--\w+^/.test(arg) || /^--\w+=.+$/.test(arg))
+    .filter(arg => !/^--i(gnore)?/.test(arg)),
+  args: argv._,
+})
   .then((output) => { // eslint-disable-line promise/prefer-await-to-then
     spinner.stop();
 
