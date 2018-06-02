@@ -17,7 +17,7 @@
     "LICENSE"
   ],
   "bin": {
-    "flow-check": "./bin/index.js"
+    "check-flow": "./bin/index.js"
   },
   "dependencies": {
     "minimatch": "3.0.4",
