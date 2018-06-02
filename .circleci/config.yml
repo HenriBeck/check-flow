@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  lint:
+  test:
     working_directory: ~/check-flow
     docker:
       - image: circleci/node:8@sha256:a5016f2580b8a80611bafe3edf706fbd2ede32b0f5e638d0af8841333abd21f0
