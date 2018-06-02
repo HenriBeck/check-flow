@@ -76,7 +76,7 @@ export default class Parser {
    * @returns {String[]} - Returns a new array of errors.
    */
   handleNewErrorLine(errors: $ReadOnlyArray<string>, line: string) {
-    const matches = line.match(/Error -+ (.+)/);
+    const matches = line.match(/Error -+ (.+):\d+:\d+/);
 
     if (!matches) {
       return [

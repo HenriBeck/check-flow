@@ -1,38 +1,35 @@
 // @flow strict-local
 
 import { execFile } from 'child_process';
-import ora from 'ora';
 
 import Parser from './parser';
 
-export default function runFlow(flow: string, ignoreFiles: $ReadOnlyArray<string>) {
-  const spinner = ora('Running flow');
-  const parser = new Parser(ignoreFiles);
+type Options = {|
+  ignoreFiles: $ReadOnlyArray<string>,
+  options: $ReadOnlyArray<string>,
+  args: $ReadOnlyArray<string>,
+|};
 
-  // Empty line between command and spinner
-  console.log('');
+export default function runFlow(flow: string, options: Options) {
+  console.log(options);
 
-  spinner.start();
+  // eslint-disable-next-line promise/avoid-new
+  return new Promise((resolve, reject) => {
+    const parser = new Parser(options.ignoreFiles);
 
-  // eslint-disable-next-line promise/prefer-await-to-callbacks, handle-callback-err
-  execFile(flow, ['check', '--color=always'], (err, stdout) => {
-    spinner.stop();
+    execFile(flow, [
+      'check',
+      ...options.args,
+      ...options.options,
+      // eslint-disable-next-line promise/prefer-await-to-callbacks, handle-callback-err
+    ], (err, stdout) => {
+      // Filter the errors from the stdout
+      const filteredErrors = parser.filterErrors(stdout);
+      const errorsCount = filteredErrors.length;
+      const errosOutput = filteredErrors.join('\n');
+      const output = `${errosOutput}Found ${errorsCount} error${errorsCount === 1 ? '' : 's'}\n`;
 
-    // Filter the errors from the stdout
-    const filteredErrors = parser.filterErrors(stdout);
-    const errorsCount = filteredErrors.length;
-
-    // If we have errors, log them out
-    if (filteredErrors.length > 0) {
-      console.log(filteredErrors.join('\n'));
-    }
-
-    // Output the actual error count
-    console.log(`Found ${errorsCount} error${errorsCount === 1 ? '' : 's'}\n`);
-
-    // End the process when we have more than one error with an error code
-    if (filteredErrors.length > 0) {
-      process.exit(2); // eslint-disable-line unicorn/no-process-exit
-    }
+      return errorsCount > 0 ? reject(output) : resolve(output);
+    });
   });
 }

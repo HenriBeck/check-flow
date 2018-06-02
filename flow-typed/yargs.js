@@ -1,5 +1,11 @@
 declare module 'yargs' {
-  declare export default {
-    argv: Object,
+  declare type yargs = {
+    argv: {
+      _: $ReadOnlyArray<string>,
+      [key: string]: string,
+    },
+    option(name: string, options: {}): yargs,
   };
+
+  declare export default yargs;
 }
