@@ -17,11 +17,11 @@ export default function runFlow(flow: string, options: Options) {
   return new Promise((resolve, reject) => {
     const parser = new Parser(options.ignoreFiles);
 
-    // eslint-disable-next-line promise/prefer-await-to-callbacks, handle-callback-err
     execFile(flow, [
       'check',
       ...options.args,
       ...options.options,
+      // eslint-disable-next-line promise/prefer-await-to-callbacks, handle-callback-err
     ], (err, stdout) => {
       // Filter the errors from the stdout
       const filteredErrors = parser.filterErrors(stdout);
