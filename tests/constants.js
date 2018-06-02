@@ -1,8 +1,7 @@
 // @flow strict-local
 
 export const ignoredFiles = [
-  'tests/constants.js',
-  'tests/flow-0.65.0.test.js',
+  'tests/*',
 ];
 
 export const noErrorsIgnoredFiles = [

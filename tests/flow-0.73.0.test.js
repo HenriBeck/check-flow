@@ -1,7 +1,7 @@
 // @flow strict-local
 
 import test from 'ava';
-import flow from 'flow-0.65.0';
+import flow from 'flow-bin';
 
 import runFlow from '../src/run-flow';
 
@@ -12,7 +12,7 @@ import {
   oneErrorIgnoredFiles,
 } from './constants';
 
-test('flow 0.65.0: no errors', async (t) => {
+test('flow 0.73.0: no errors', async (t) => {
   const result = await runFlow(flow, {
     ignoreFiles: [
       ...ignoredFiles,
@@ -27,7 +27,7 @@ test('flow 0.65.0: no errors', async (t) => {
   t.true(result.includes('Found 0 errors'));
 });
 
-test('flow 0.65.0: one error', async (t) => {
+test('flow 0.73.0: one error', async (t) => {
   try {
     const res = await runFlow(flow, {
       ignoreFiles: [
@@ -46,7 +46,7 @@ test('flow 0.65.0: one error', async (t) => {
   }
 });
 
-test('flow 0.65.0: multiple errors', async (t) => {
+test('flow 0.73.0: multiple errors', async (t) => {
   try {
     const res = await runFlow(flow, {
       ignoreFiles: [

@@ -5,3 +5,5 @@ function concat(stringA: string, stringB: string) {
 }
 
 concat('a', 'b');
+
+export { concat };

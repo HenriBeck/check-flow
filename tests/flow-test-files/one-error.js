@@ -6,3 +6,4 @@ function concat(stringA: string, stringB: string) {
 
 concat(1, 'a');
 
+export { concat };

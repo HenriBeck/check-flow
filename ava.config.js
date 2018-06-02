@@ -1,4 +1,5 @@
 export default {
+  verbose: true,
   cache: false,
   concurrency: 1,
   failFast: false,
