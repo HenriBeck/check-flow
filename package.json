@@ -1,5 +1,5 @@
 {
-  "name": "flow-checker",
+  "name": "check-flow",
   "version": "0.3.0",
   "description": "A better flow cli with ignoring files from node_modules",
   "main": "index.js",
