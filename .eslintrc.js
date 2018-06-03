@@ -4,6 +4,4 @@ module.exports = {
     'henribeck/server',
     'henribeck/flow',
   ],
-
-  rules: { 'no-console': 'off' },
 };

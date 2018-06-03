@@ -1,12 +1,11 @@
 [ignore]
-.*/flow-test-files/.*
+.*/.*\.test\.js
 
 [include]
 
 [libs]
 
 [lints]
-all=error
 
 [options]
 emoji=true
