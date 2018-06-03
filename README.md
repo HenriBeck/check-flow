@@ -1,12 +1,12 @@
-# flow-checker
+# check-flow
 
-[![npm](https://img.shields.io/npm/v/flow-checker.svg)](https://www.npmjs.com/package/flow-checker) ![Maintenance](https://img.shields.io/maintenance/yes/2018.svg) ![npm](https://img.shields.io/npm/l/flow-checker.svg) ![David](https://img.shields.io/david/HenriBeck/flow-checker.svg) [![CircleCI](https://circleci.com/gh/HenriBeck/flow-checker.svg?style=svg)](https://circleci.com/gh/HenriBeck/flow-checker)
+[![npm](https://img.shields.io/npm/v/check-flow.svg)](https://www.npmjs.com/package/check-flow) ![Maintenance](https://img.shields.io/maintenance/yes/2018.svg) ![npm](https://img.shields.io/npm/l/check-flow.svg) ![David](https://img.shields.io/david/HenriBeck/check-flow.svg) [![CircleCI](https://circleci.com/gh/HenriBeck/check-flow.svg?style=svg)](https://circleci.com/gh/HenriBeck/check-flow)
 
 A better flow cli with ignoring errors from files which are in `node_modules` folder.
 
 ## Installation
 
-> yarn install --dev flow-checker flow-bin
+> yarn install --dev check-flow flow-bin
 
 ## Usage
 
@@ -15,15 +15,21 @@ But you don't loose any typing definitions by needing to ignore certain files in
 
 ```json
 {
-  "scripts": { "flow": "flow-check" }
+  "scripts": { "flow": "check-flow" }
 }
 ```
 
-## ToDos
+Any arguments except the `ignore` option will be passed down to `flow check`.
 
-- Implement configuration of ignored files
-- Add a way of passing flags down to flow
-- Add tests for each flow version
+## Options
+
+#### ignore
+
+This way you can configure from which files the errors to be ignored.
+This can be a string with multiple globs seperated by an comma.
+
+> Alias: i
+> Default value: node_modules/**/*
 
 ## License
 
