@@ -28,7 +28,7 @@ runFlow(flow, {
     .filter(arg => !/^--i(gnore)?/.test(arg)),
   args: argv._,
 })
-  .then((output) => { // eslint-disable-line promise/prefer-await-to-then
+  .then((output) => {
     spinner.stop();
 
     // eslint-disable-next-line no-console
