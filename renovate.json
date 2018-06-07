@@ -4,5 +4,11 @@
   ],
   "assignees": ["HenriBeck"],
 
-  "digest": { "automerge": true }
+  "digest": { "automerge": true },
+
+  "packageRules": [{
+    "packageNames": ["flow-bin"],
+    "rangeStrategy": "replace",
+    "depTypeList": ["peerDependencies"]
+  }]
 }
