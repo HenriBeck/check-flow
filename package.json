@@ -45,10 +45,10 @@
     "flow-0.70.0": "npm:flow-bin@0.70.0",
     "flow-0.71.0": "npm:flow-bin@0.71.0",
     "flow-0.72.0": "npm:flow-bin@0.72.0",
-    "flow-bin": "0.73.0",
+    "flow-bin": "0.74.0",
     "rimraf": "2.6.2"
   },
   "peerDependencies": {
-    "flow-bin": "^0.65.0"
+    "flow-bin": "^0.74.0"
   }
 }
