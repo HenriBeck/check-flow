@@ -4,7 +4,7 @@ jobs:
   test:
     working_directory: ~/check-flow
     docker:
-      - image: circleci/node:8@sha256:93d93c1ee9134aa55bc7c5c4f6d25886810091f6300539b9a4bd9c08838da692
+      - image: circleci/node:8@sha256:c3e1df1837e635d187eea2d1b87f29c1aaf877a24bd03af0758c37ff005557c3
     steps:
       - checkout
       - run:
@@ -17,7 +17,7 @@ jobs:
   lint:
     working_directory: ~/check-flow
     docker:
-      - image: circleci/node:8@sha256:93d93c1ee9134aa55bc7c5c4f6d25886810091f6300539b9a4bd9c08838da692
+      - image: circleci/node:8@sha256:c3e1df1837e635d187eea2d1b87f29c1aaf877a24bd03af0758c37ff005557c3
     steps:
       - checkout
       - run:
@@ -30,7 +30,7 @@ jobs:
   flow:
     working_directory: ~/check-flow
     docker:
-      - image: circleci/node:8@sha256:93d93c1ee9134aa55bc7c5c4f6d25886810091f6300539b9a4bd9c08838da692
+      - image: circleci/node:8@sha256:c3e1df1837e635d187eea2d1b87f29c1aaf877a24bd03af0758c37ff005557c3
     steps:
       - checkout
       - run:
@@ -43,7 +43,7 @@ jobs:
   build:
     working_directory: ~/check-flow
     docker:
-      - image: circleci/node:8@sha256:93d93c1ee9134aa55bc7c5c4f6d25886810091f6300539b9a4bd9c08838da692
+      - image: circleci/node:8@sha256:c3e1df1837e635d187eea2d1b87f29c1aaf877a24bd03af0758c37ff005557c3
     steps:
       - checkout
       - run:
