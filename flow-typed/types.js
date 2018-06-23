@@ -38,6 +38,10 @@ declare module 'flow-0.73.0' {
   declare export default string;
 }
 
+declare module 'flow-0.74.0' {
+  declare export default string;
+}
+
 declare module 'ora' {
   declare export default function ora(text: string): {
     start(): void,
