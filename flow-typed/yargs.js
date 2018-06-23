@@ -1,3 +1,5 @@
+// @flow strict-local
+
 declare module 'yargs' {
   declare type yargs = {
     argv: {
