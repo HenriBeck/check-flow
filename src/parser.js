@@ -58,9 +58,9 @@ export default class Parser {
     return lines.reduce((errors, line) => {
       if (/Found \d+ errors?/.test(line)) {
         return this.handleErrorFoundCountLine(errors);
-      } else if (/Error -+/.test(line)) {
+      } else if (/(Error|Warning) -+/.test(line)) {
         return this.handleNewErrorLine(errors, line, /Error -+ (.+):\d+:\d+/);
-      } else if (/Error: /.test(line)) {
+      } else if (/(Error|Warning): /.test(line)) {
         return this.handleNewErrorLine(errors, line, /Error: (.+):\d+/);
       }
 
