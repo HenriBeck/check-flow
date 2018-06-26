@@ -36,7 +36,7 @@
     "@babel/register": "7.0.0-beta.51",
     "ava": "1.0.0-beta.6",
     "eslint": "5.0.1",
-    "eslint-config-henribeck": "5.0.2",
+    "eslint-config-henribeck": "5.0.3",
     "flow-0.65.0": "npm:flow-bin@0.65.0",
     "flow-0.66.0": "npm:flow-bin@0.66.0",
     "flow-0.67.0": "npm:flow-bin@0.67.1",
