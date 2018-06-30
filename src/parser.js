@@ -1,11 +1,14 @@
 // @flow strict-local
 
+import debug from 'debug';
 import ignore, { type Ignore } from 'ignore';
 
 type Options = {
   ignoreFiles: $ReadOnlyArray<string>,
   includeFiles: $ReadOnlyArray<string>,
 };
+
+const log = debug('check-flow:parser');
 
 /**
  * The Parser for the flow output.
@@ -67,6 +70,7 @@ export default class Parser {
    * @returns {String[]} - Returns an array of errors.
    */
   filterErrors(stdout: string) {
+    log('Filtering errors');
     const lines = stdout.split('\n');
 
     return lines.reduce((errors, line) => {
@@ -108,6 +112,7 @@ export default class Parser {
 
     // Ignore the error when the file path is in the ignored files
     if (this.ignoreFiles.ignores(filePath)) {
+      log('Ignoring error in file:', filePath, 'because it\'s an ignored file');
       this.ignoreNextLines = true;
 
       return errors;
