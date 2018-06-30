@@ -1,6 +1,6 @@
 {
   "name": "check-flow",
-  "version": "0.9.2",
+  "version": "1.0.0",
   "description": "A better flow cli with ignoring files from node_modules",
   "main": "index.js",
   "license": "MIT",
