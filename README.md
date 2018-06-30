@@ -19,17 +19,16 @@ But you don't loose any typing definitions by needing to ignore certain files in
 }
 ```
 
-Any arguments except the `ignore` option will be passed down to `flow check`.
+## Ingoring files
 
-## Options
+Ignoring files is configured by a `.flowignore` inside the current working directory.
+It supports the same syntax as the `.gitignore`.
 
-#### ignore
+## Including files
 
-This way you can configure from which files the errors to be ignored.
-This can be a string with multiple globs seperated by an comma.
-
-> Alias: i
-> Default value: node_modules/**/*
+The main argument to the command are globs which should only report errors for.
+This can be useful to only get errors from a specific directory or for something like [https://github.com/okonet/lint-staged](lint-staged).
+Multiple globs can be specified.
 
 ## License
 
