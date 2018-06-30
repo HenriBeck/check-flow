@@ -9,7 +9,7 @@
     "prebuild": "rimraf bin/",
     "build": "babel src -d bin",
     "preflow": "yarn run build",
-    "flow": "node bin/index.js --i=\"node_modules/**/*\" --color=always",
+    "flow": "node ./bin/index.js --color=always",
     "lint": "eslint src/ tests/ flow-typed/",
     "prepare": "yarn run build"
   },
@@ -22,9 +22,10 @@
     "check-flow": "./bin/index.js"
   },
   "dependencies": {
-    "minimatch": "3.0.4",
-    "ora": "2.1.0",
-    "yargs": "12.0.1"
+    "debug": "^3.1.0",
+    "ignore": "^4.0.2",
+    "ora": "^2.1.0",
+    "yargs": "^12.0.1"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.51",
@@ -51,6 +52,6 @@
     "rimraf": "2.6.2"
   },
   "peerDependencies": {
-    "flow-bin": "^0.75.0"
+    "flow-bin": "^0.65.0"
   }
 }

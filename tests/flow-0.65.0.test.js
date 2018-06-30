@@ -6,21 +6,13 @@ import flow from 'flow-0.65.0';
 import runFlow from '../src/run-flow';
 
 import {
-  ignoredFiles,
-  noErrorsIgnoredFiles,
-  multipleErrorsIgnoredFiles,
-  oneErrorIgnoredFiles,
+  multipleErrorsOptions,
+  noErrorsOptions,
+  oneErrorOptions,
 } from './constants';
 
-test('flow 0.65.0: no errors', async (t) => {
-  const result = await runFlow(flow, {
-    ignoreFiles: [
-      ...ignoredFiles,
-      ...noErrorsIgnoredFiles,
-    ],
-    args: ['tests/'],
-    options: ['--color=never'],
-  });
+test.only('flow 0.65.0: no errors', async (t) => {
+  const result = await runFlow(flow, noErrorsOptions);
 
   t.snapshot(result);
 
@@ -29,14 +21,7 @@ test('flow 0.65.0: no errors', async (t) => {
 
 test('flow 0.65.0: one error', async (t) => {
   try {
-    const res = await runFlow(flow, {
-      ignoreFiles: [
-        ...ignoredFiles,
-        ...oneErrorIgnoredFiles,
-      ],
-      args: ['tests/'],
-      options: ['--color=never'],
-    });
+    const res = await runFlow(flow, oneErrorOptions);
 
     t.fail(res);
   } catch (error) {
@@ -48,14 +33,7 @@ test('flow 0.65.0: one error', async (t) => {
 
 test('flow 0.65.0: multiple errors', async (t) => {
   try {
-    const res = await runFlow(flow, {
-      ignoreFiles: [
-        ...ignoredFiles,
-        ...multipleErrorsIgnoredFiles,
-      ],
-      args: ['tests/'],
-      options: ['--color=never'],
-    });
+    const res = await runFlow(flow, multipleErrorsOptions);
 
     t.fail(res);
   } catch (error) {

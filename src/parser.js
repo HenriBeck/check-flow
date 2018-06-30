@@ -1,6 +1,11 @@
 // @flow strict-local
 
-import minimatch from 'minimatch';
+import ignore, { type Ignore } from 'ignore';
+
+type Options = {
+  ignoreFiles: $ReadOnlyArray<string>,
+  includeFiles: $ReadOnlyArray<string>,
+};
 
 /**
  * The Parser for the flow output.
@@ -32,18 +37,27 @@ export default class Parser {
 
   /**
    * The ignored files.
-   * This should be an array of globs.
    */
-  ignoredFiles: $ReadOnlyArray<string>;
+  ignoreFiles: Ignore;
+
+  /**
+   * The included files.
+   */
+  includeFiles: Ignore;
 
   /**
    * Initialize some constants.
    *
-   * @param {String[]} ignoredFiles - The ignored files.
+   * @param {Object} options - The options for the parser.
+   * @param {String[]} options.ignoreFiles - The files to ignore.
+   * Defaults to node_modules/.
+   * @param {String[]} options.includeFiles - The files to only include in the output.
+   * Defaults to *.
    */
-  constructor(ignoredFiles: $ReadOnlyArray<string>) {
+  constructor(options: Options) {
     this.ignoreNextLines = false;
-    this.ignoredFiles = ignoredFiles;
+    this.ignoreFiles = ignore().add(options.ignoreFiles);
+    this.includeFiles = ignore().add(options.includeFiles);
   }
 
   /**
@@ -75,12 +89,15 @@ export default class Parser {
    *
    * @param {String[]} errors - The array of errors.
    * @param {String} line - The currently processed line.
+   * @param {Regex} regex - The regex to get the file path from.
    * @returns {String[]} - Returns a new array of errors.
    */
   handleNewErrorLine(errors: $ReadOnlyArray<string>, line: string, regex: RegExp) {
     const matches = line.match(regex);
 
     if (!matches) {
+      this.ignoreNextLines = false;
+
       return [
         ...errors,
         line,
@@ -88,11 +105,18 @@ export default class Parser {
     }
 
     const filePath = matches[1];
-    const shouldBeIgnored = this.ignoredFiles.some(glob => minimatch(filePath, glob));
 
-    this.ignoreNextLines = shouldBeIgnored;
+    // Ignore the error when the file path is in the ignored files
+    if (this.ignoreFiles.ignores(filePath)) {
+      this.ignoreNextLines = true;
 
-    return shouldBeIgnored ? errors : [
+      return errors;
+    }
+
+    // Ignore the next lines when the file path isn't in the included files
+    this.ignoreNextLines = !this.includeFiles.ignores(filePath);
+
+    return this.ignoreNextLines ? errors : [
       ...errors,
       line,
     ];
