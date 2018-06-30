@@ -11,7 +11,7 @@ import {
   oneErrorOptions,
 } from './constants';
 
-test.only('flow 0.65.0: no errors', async (t) => {
+test('flow 0.65.0: no errors', async (t) => {
   const result = await runFlow(flow, noErrorsOptions);
 
   t.snapshot(result);
