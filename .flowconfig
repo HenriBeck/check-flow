@@ -1,5 +1,4 @@
 [ignore]
-.*/flow-test-files/.*
 
 [include]
 

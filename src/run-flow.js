@@ -6,18 +6,17 @@ import Parser from './parser';
 
 type Options = {|
   ignoreFiles: $ReadOnlyArray<string>,
+  includeFiles: $ReadOnlyArray<string>,
   options: $ReadOnlyArray<string>,
-  args: $ReadOnlyArray<string>,
 |};
 
 export default function runFlow(flow: string, options: Options) {
   // eslint-disable-next-line promise/avoid-new
   return new Promise((resolve, reject) => {
-    const parser = new Parser(options.ignoreFiles);
+    const parser = new Parser(options);
 
     execFile(flow, [
       'check',
-      ...options.args,
       ...options.options,
       // eslint-disable-next-line promise/prefer-await-to-callbacks, handle-callback-err
     ], (err, stdout) => {
