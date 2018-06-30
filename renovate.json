@@ -8,7 +8,7 @@
 
   "packageRules": [{
     "packageNames": ["flow-bin"],
-    "rangeStrategy": "replace",
+    "rangeStrategy": "auto",
     "depTypeList": ["peerDependencies"]
   }]
 }
