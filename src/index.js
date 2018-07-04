@@ -55,7 +55,7 @@ async function run() {
 
   try {
     const output = await runFlow(flow, {
-      includeFiles: argv._,
+      includeFiles: argv._.length === 0 ? ['*'] : argv._,
       ignoreFiles,
       options: process.argv
         .slice(2)
