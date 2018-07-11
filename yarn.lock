@@ -444,12 +444,12 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@babel/node@7.0.0-beta.53":
-  version "7.0.0-beta.53"
-  resolved "https://registry.yarnpkg.com/@babel/node/-/node-7.0.0-beta.53.tgz#25323cdcc38dfec8deb2afd5f4e053013c910c40"
+"@babel/node@7.0.0-beta.52":
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/node/-/node-7.0.0-beta.52.tgz#13333a50e80ae4f52b5359f7ccda1402464e9198"
   dependencies:
-    "@babel/polyfill" "7.0.0-beta.53"
-    "@babel/register" "7.0.0-beta.53"
+    "@babel/polyfill" "7.0.0-beta.52"
+    "@babel/register" "7.0.0-beta.52"
     commander "^2.8.1"
     fs-readdir-recursive "^1.0.0"
     lodash "^4.17.5"
@@ -791,13 +791,6 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.11.1"
 
-"@babel/polyfill@7.0.0-beta.53":
-  version "7.0.0-beta.53"
-  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.0.0-beta.53.tgz#514b0b5a76c7b0bfb829bc0ee4d9dd5eaca74336"
-  dependencies:
-    core-js "^2.5.7"
-    regenerator-runtime "^0.11.1"
-
 "@babel/preset-env@7.0.0-beta.52":
   version "7.0.0-beta.52"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.0.0-beta.52.tgz#1e833fb8698f51e345ad7d33fbab26d0ce81989d"
@@ -849,6 +842,18 @@
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.53"
     "@babel/plugin-transform-flow-strip-types" "7.0.0-beta.53"
+
+"@babel/register@7.0.0-beta.52":
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.0.0-beta.52.tgz#011f925e087919ac3a75a3e8b8606d1d224046e5"
+  dependencies:
+    core-js "^2.5.7"
+    find-cache-dir "^1.0.0"
+    home-or-tmp "^3.0.0"
+    lodash "^4.17.5"
+    mkdirp "^0.5.1"
+    pirates "^3.0.1"
+    source-map-support "^0.4.2"
 
 "@babel/register@7.0.0-beta.53":
   version "7.0.0-beta.53"
