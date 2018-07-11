@@ -33,9 +33,9 @@
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
-"@babel/cli@7.0.0-beta.52":
-  version "7.0.0-beta.52"
-  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.0.0-beta.52.tgz#e8a6e1c239c66c90daeed06d6ce02851536e7445"
+"@babel/cli@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.0.0-beta.53.tgz#f2caf09950224123845ec5077ed7ab0863d8d823"
   dependencies:
     commander "^2.8.1"
     convert-source-map "^1.1.0"
@@ -307,6 +307,10 @@
   version "7.0.0-beta.52"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.52.tgz#2f058c5f7c3a5fe4bc219036b2e78e11bddeb7ad"
 
+"@babel/helper-plugin-utils@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.53.tgz#d64458636ffc258b42714a9dd93aeb6f8b8cf3ed"
+
 "@babel/helper-regex@7.0.0-beta.51":
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/helper-regex/-/helper-regex-7.0.0-beta.51.tgz#99722a3c0c704596afb123284b0a888a1a003d82"
@@ -440,12 +444,12 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@babel/node@7.0.0-beta.52":
-  version "7.0.0-beta.52"
-  resolved "https://registry.yarnpkg.com/@babel/node/-/node-7.0.0-beta.52.tgz#13333a50e80ae4f52b5359f7ccda1402464e9198"
+"@babel/node@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/node/-/node-7.0.0-beta.53.tgz#25323cdcc38dfec8deb2afd5f4e053013c910c40"
   dependencies:
-    "@babel/polyfill" "7.0.0-beta.52"
-    "@babel/register" "7.0.0-beta.52"
+    "@babel/polyfill" "7.0.0-beta.53"
+    "@babel/register" "7.0.0-beta.53"
     commander "^2.8.1"
     fs-readdir-recursive "^1.0.0"
     lodash "^4.17.5"
@@ -524,11 +528,11 @@
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.52"
 
-"@babel/plugin-syntax-flow@7.0.0-beta.52":
-  version "7.0.0-beta.52"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-flow/-/plugin-syntax-flow-7.0.0-beta.52.tgz#8125c1de15b352cb71f6e22200f888a546772c8c"
+"@babel/plugin-syntax-flow@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-flow/-/plugin-syntax-flow-7.0.0-beta.53.tgz#6e4ee8bd57b20e95425ffed995884967d56e28aa"
   dependencies:
-    "@babel/helper-plugin-utils" "7.0.0-beta.52"
+    "@babel/helper-plugin-utils" "7.0.0-beta.53"
 
 "@babel/plugin-syntax-object-rest-spread@7.0.0-beta.51":
   version "7.0.0-beta.51"
@@ -650,12 +654,12 @@
     "@babel/helper-builder-binary-assignment-operator-visitor" "7.0.0-beta.52"
     "@babel/helper-plugin-utils" "7.0.0-beta.52"
 
-"@babel/plugin-transform-flow-strip-types@7.0.0-beta.52":
-  version "7.0.0-beta.52"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-flow-strip-types/-/plugin-transform-flow-strip-types-7.0.0-beta.52.tgz#321c1dd84ba44ee3429f995c7bf58cd0ababb714"
+"@babel/plugin-transform-flow-strip-types@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-flow-strip-types/-/plugin-transform-flow-strip-types-7.0.0-beta.53.tgz#d67fa5b4f78cfc1f9a44556b0623a22fb2e7bc63"
   dependencies:
-    "@babel/helper-plugin-utils" "7.0.0-beta.52"
-    "@babel/plugin-syntax-flow" "7.0.0-beta.52"
+    "@babel/helper-plugin-utils" "7.0.0-beta.53"
+    "@babel/plugin-syntax-flow" "7.0.0-beta.53"
 
 "@babel/plugin-transform-for-of@7.0.0-beta.52":
   version "7.0.0-beta.52"
@@ -787,6 +791,13 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.11.1"
 
+"@babel/polyfill@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.0.0-beta.53.tgz#514b0b5a76c7b0bfb829bc0ee4d9dd5eaca74336"
+  dependencies:
+    core-js "^2.5.7"
+    regenerator-runtime "^0.11.1"
+
 "@babel/preset-env@7.0.0-beta.52":
   version "7.0.0-beta.52"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.0.0-beta.52.tgz#1e833fb8698f51e345ad7d33fbab26d0ce81989d"
@@ -832,16 +843,16 @@
     js-levenshtein "^1.1.3"
     semver "^5.3.0"
 
-"@babel/preset-flow@7.0.0-beta.52":
-  version "7.0.0-beta.52"
-  resolved "https://registry.yarnpkg.com/@babel/preset-flow/-/preset-flow-7.0.0-beta.52.tgz#da2a0f576dfbe78b920a2ac2c47831a89c526004"
+"@babel/preset-flow@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/preset-flow/-/preset-flow-7.0.0-beta.53.tgz#6a2961dee4a12bd6f5cb61161b453df7b217441e"
   dependencies:
-    "@babel/helper-plugin-utils" "7.0.0-beta.52"
-    "@babel/plugin-transform-flow-strip-types" "7.0.0-beta.52"
+    "@babel/helper-plugin-utils" "7.0.0-beta.53"
+    "@babel/plugin-transform-flow-strip-types" "7.0.0-beta.53"
 
-"@babel/register@7.0.0-beta.52":
-  version "7.0.0-beta.52"
-  resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.0.0-beta.52.tgz#011f925e087919ac3a75a3e8b8606d1d224046e5"
+"@babel/register@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.0.0-beta.53.tgz#a3c62be5256b9ce0b940b6a34d793e8bc97b7654"
   dependencies:
     core-js "^2.5.7"
     find-cache-dir "^1.0.0"
