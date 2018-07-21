@@ -47,3 +47,7 @@ declare module 'flow-0.74.0' {
 declare module 'flow-0.75.0' {
   declare export default string;
 }
+
+declare module 'flow-0.76.0' {
+  declare export default string;
+}

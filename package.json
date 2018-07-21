@@ -49,7 +49,8 @@
     "flow-0.73.0": "npm:flow-bin@0.73.0",
     "flow-0.74.0": "npm:flow-bin@0.74.0",
     "flow-0.75.0": "npm:flow-bin@0.75.0",
-    "flow-bin": "0.76.0",
+    "flow-0.76.0": "npm:flow-bin@0.76.0",
+    "flow-bin": "0.77.0",
     "rimraf": "2.6.2"
   },
   "peerDependencies": {
