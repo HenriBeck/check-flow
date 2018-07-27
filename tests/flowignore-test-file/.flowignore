@@ -1,0 +1,7 @@
+
+test1/*
+# This is a comment
+
+test2/**/*
+
+babel.config.js
