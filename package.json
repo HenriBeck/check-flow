@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "test": "ava",
+    "test:coverage": "nyc yarn test",
     "prebuild": "rimraf bin/",
     "build": "babel src -d bin",
     "preflow": "yarn run build",
@@ -51,9 +52,26 @@
     "flow-0.75.0": "npm:flow-bin@0.75.0",
     "flow-0.76.0": "npm:flow-bin@0.76.0",
     "flow-bin": "0.77.0",
+    "nyc": "12.0.2",
     "rimraf": "2.6.2"
   },
   "peerDependencies": {
     "flow-bin": "0.x.0"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "html"
+    ],
+    "include": [
+      "src/*.js"
+    ],
+    "exclude": [
+      "src/index.js",
+      "*.config.js",
+      "tests/*.js"
+    ]
   }
 }

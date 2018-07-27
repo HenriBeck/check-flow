@@ -4,40 +4,14 @@
 import yargs from 'yargs';
 import flow from 'flow-bin';
 import ora from 'ora';
-import path from 'path';
 import debug from 'debug';
-import fs from 'fs';
-import { promisify } from 'util';
 
+import parseIgnoreFile from './parse-ignore-file';
 import runFlow from './run-flow';
 
-const log = debug('check-flow');
+const log = debug('check-flow:bin');
 
-const readFile = promisify(fs.readFile);
 const spinner = ora('Running flow');
-const IGNORE_FILENAME = '.flowignore';
-const DEFAULT_FILES = [
-  'node_modules/**/*',
-];
-
-async function parseIgnoreFile() {
-  const cwd = process.cwd();
-  const ignoreFilePath = path.resolve(cwd, IGNORE_FILENAME);
-
-  try {
-    const content = await readFile(ignoreFilePath, 'utf-8');
-
-    log('Found .flowignore file');
-
-    return content
-      .split('\n')
-      .filter(line => line && line.length > 0 && !line.startsWith('#'));
-  } catch (error) {
-    log('Couldn\'t find a .flowignore file', error);
-
-    return DEFAULT_FILES;
-  }
-}
 
 const argv = yargs
   .command('$0', 'Run flow check with ignoring errors and warnings from certain files')
@@ -51,9 +25,11 @@ async function run() {
 
   spinner.start();
 
-  const ignoreFiles = await parseIgnoreFile();
+  const ignoreFiles = await parseIgnoreFile(process.cwd());
 
   try {
+    log('Running flow check');
+
     const output = await runFlow(flow, {
       includeFiles: argv._.length === 0 ? ['*'] : argv._,
       ignoreFiles,
@@ -64,10 +40,14 @@ async function run() {
 
     spinner.stop();
 
+    log('Finished running flow check with 0 errors');
+
     // eslint-disable-next-line no-console
     console.log(output);
   } catch (error) {
     spinner.stop();
+
+    log('Finished running flow check with errors');
 
     // eslint-disable-next-line no-console
     console.log(error);
