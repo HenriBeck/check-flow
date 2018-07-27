@@ -3,8 +3,6 @@ version: 2
 jobs:
   test:
     working_directory: ~/check-flow
-    environment:
-      CC_TEST_REPORTER_ID: YOUR_REPO_CC_TEST_REPORTER_ID
     docker:
       - image: circleci/node:8
     steps:
