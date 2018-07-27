@@ -11,8 +11,17 @@ jobs:
           name: Install Packages
           command: yarn install
       - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+      - run:
           name: Test
-          command: yarn run test
+          command: yarn run test:coverage
+      - run:
+          name: Report Coverage
+          command: ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
 
   lint:
     working_directory: ~/check-flow

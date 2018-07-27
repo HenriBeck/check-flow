@@ -1,3 +1,6 @@
 node_modules/
 dist/
 bin/
+.idea/
+coverage/
+.nyc_output/
