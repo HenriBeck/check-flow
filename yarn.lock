@@ -2913,9 +2913,9 @@ ignore-walk@^3.0.1:
   dependencies:
     minimatch "^3.0.4"
 
-ignore@4.0.4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.4.tgz#5b3ef31afe749eea3cd47ca8090f3087f3e956f9"
+ignore@4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.5.tgz#333535a20325ba4852c4ddb135d47392aa035e6d"
 
 ignore@^3.3.5:
   version "3.3.8"
