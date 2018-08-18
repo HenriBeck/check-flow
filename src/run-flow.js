@@ -10,7 +10,7 @@ type Options = {|
   options: $ReadOnlyArray<string>,
 |};
 
-export default function runFlow(flow: string, options: Options) {
+export default function runFlow(flow: string, options: Options): Promise<string> {
   // eslint-disable-next-line promise/avoid-new
   return new Promise((resolve, reject) => {
     const parser = new Parser(options);

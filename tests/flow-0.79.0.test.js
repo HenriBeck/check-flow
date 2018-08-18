@@ -1,7 +1,7 @@
 // @flow strict-local
 
 import test from 'ava';
-import flow from 'flow-0.78.0';
+import flow from 'flow-bin';
 
 import runFlow from '../src/run-flow';
 
@@ -11,7 +11,7 @@ import {
   multipleErrorsOptions,
 } from './constants';
 
-test('flow 0.78.0: no errors', async (t) => {
+test('flow 0.79.0: no errors', async (t) => {
   const result = await runFlow(flow, noErrorsOptions);
 
   t.snapshot(result);
@@ -19,7 +19,7 @@ test('flow 0.78.0: no errors', async (t) => {
   t.true(result.includes('Found 0 errors'));
 });
 
-test('flow 0.78.0: one error', async (t) => {
+test('flow 0.79.0: one error', async (t) => {
   try {
     const res = await runFlow(flow, oneErrorOptions);
 
@@ -31,7 +31,7 @@ test('flow 0.78.0: one error', async (t) => {
   }
 });
 
-test('flow 0.78.0: multiple errors', async (t) => {
+test('flow 0.79.0: multiple errors', async (t) => {
   try {
     const res = await runFlow(flow, multipleErrorsOptions);
 
