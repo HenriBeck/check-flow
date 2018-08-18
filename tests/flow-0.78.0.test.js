@@ -1,7 +1,7 @@
 // @flow strict-local
 
 import test from 'ava';
-import flow from 'flow-bin';
+import flow from 'flow-0.78.0';
 
 import runFlow from '../src/run-flow';
 
