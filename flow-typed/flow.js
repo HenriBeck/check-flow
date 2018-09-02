@@ -59,3 +59,7 @@ declare module 'flow-0.77.0' {
 declare module 'flow-0.78.0' {
   declare export default string;
 }
+
+declare module 'flow-0.79.0' {
+  declare export default string;
+}
