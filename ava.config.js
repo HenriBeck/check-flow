@@ -13,4 +13,5 @@ export default {
     'src/*.test.js',
     'tests/*.test.js',
   ],
+  snapshotDir: './snapshots',
 };
