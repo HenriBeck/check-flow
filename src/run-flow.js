@@ -25,8 +25,9 @@ export default function runFlow(flow: string, options: Options): Promise<string>
 
       const {
         errors,
-        warnings
+        warnings,
       } = parser.getReport();
+      // eslint-disable-next-line fp/no-let
       let output = '';
 
       output += errors.join('\n');

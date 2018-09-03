@@ -10,7 +10,7 @@ type Options = {
 
 const log = debug('check-flow:parser');
 
-const ERROR_MATCHING_REGEX = /(Error|Warning)(?:: | -+)(.+)*/;
+const ERROR_MATCHING_REGEX = /(Error|Warning)(?:: | -+)(.+)*$/;
 const FOUND_ERRORS_REGEX = /Found \d+ errors?/;
 
 /**
@@ -62,6 +62,7 @@ export default class Parser {
   parse(stdout: string) {
     this.lines = stdout.split('\n');
 
+    // eslint-disable-next-line fp/no-loops
     while (this.lines.length > 0) {
       const line = this.getCurrentLine();
 
