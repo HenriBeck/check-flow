@@ -10,7 +10,7 @@ type Options = {
 
 const log = debug('check-flow:parser');
 
-const ERROR_MATCHING_REGEX = /(Error|Warning)(?:: | -+)(.+)*$/;
+const ERROR_MATCHING_REGEX = /(Error|Warning) -+ (.+):(\d*):(\d*)$/;
 const FOUND_ERRORS_REGEX = /Found \d+ errors?/;
 
 /**
@@ -77,48 +77,43 @@ export default class Parser {
 
       if (match) {
         const [, type, file] = match;
-        const fileMatch = file.match(/^(.*?):/);
 
-        if (fileMatch) {
-          const lines = this.getErrorLines(line);
-
-          if (this.includeError(fileMatch[1].trim())) {
-            if (type === 'Error') {
-              this.addError(lines);
-            } else if (type === 'Warning') {
-              this.addWarning(lines);
-            } else {
-              log('Unknown type', type);
-            }
-          }
-        }
+        this.handleErrorLine(
+          type,
+          file.trim(),
+          this.getErrorLines([line]),
+        );
       }
     }
   }
 
-  addError(lines: $ReadOnlyArray<string>) {
-    this.errors = [
-      ...this.errors,
-      lines.join('\n'),
-    ];
+  handleErrorLine(type: string, file: string, lines: $ReadOnlyArray<string>) {
+    if (this.includeError(file)) {
+      if (type === 'Error') {
+        this.errors = [
+          ...this.errors,
+          lines.join('\n'),
+        ];
+      } else if (type === 'Warning') {
+        this.warnings = [
+          ...this.warnings,
+          lines.join('\n'),
+        ];
+      } else {
+        log('Unknown type', type);
+      }
+    }
   }
 
-  addWarning(lines: $ReadOnlyArray<string>) {
-    this.warnings = [
-      ...this.warnings,
-      lines.join('\n'),
-    ];
-  }
-
-  getErrorLines(line: string) {
-    const lines = [line];
-
-    // Remove the lines until the next error or warning comes
-    while (!ERROR_MATCHING_REGEX.test(this.lines[0]) && !FOUND_ERRORS_REGEX.test(this.lines[0])) {
-      lines.push(this.getCurrentLine());
+  getErrorLines(lines: $ReadOnlyArray<string>) {
+    if (ERROR_MATCHING_REGEX.test(this.lines[0]) || FOUND_ERRORS_REGEX.test(this.lines[0])) {
+      return lines;
     }
 
-    return lines;
+    return this.getErrorLines([
+      ...lines,
+      this.getCurrentLine(),
+    ]);
   }
 
   includeError(filepath: string) {

@@ -34,12 +34,12 @@ export default function runFlow(flow: string, options: Options): Promise<string>
       output += warnings.join('\n');
 
       if (warnings.length > 0) {
-        output += `Found ${warnings.length} warning${warnings.length === 1 ? '' : 's'}.\n`;
+        output += `Found ${warnings.length} warning${warnings.length === 1 ? '' : 's'}\n`;
       }
 
-      output += `Found ${errors.length} error${errors.length === 1 ? '' : 's'}.\n`;
+      output += `Found ${errors.length} error${errors.length === 1 ? '' : 's'}\n`;
 
-      return errors.length > 0 || options.maxWarnings >= this.warnings.length
+      return errors.length > 0 || options.maxWarnings >= warnings.length
         ? reject(output)
         : resolve(output);
     });
