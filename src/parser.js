@@ -10,6 +10,9 @@ type Options = {
 
 const log = debug('check-flow:parser');
 
+const ERROR_MATCHING_REGEX = /(Error|Warning)(?:: | -+)(.+)*/;
+const FOUND_ERRORS_REGEX = /Found \d+ errors?/;
+
 /**
  * The Parser for the flow output.
  *
@@ -17,36 +20,30 @@ const log = debug('check-flow:parser');
  */
 export default class Parser {
   /**
-   * Append a line to the last error.
-   *
-   * @param {String[]} errors - The array of errors.
-   * @param {String} line - The line to append to the last error.
-   * @returns {String[]} - Returns a new list of errors.
-   */
-  static appendLine(errors: $ReadOnlyArray<string>, line: string): $ReadOnlyArray<string> {
-    return errors.map((error, index) => {
-      if (index === errors.length - 1) {
-        return `${error}\n${line}`;
-      }
-
-      return error;
-    });
-  }
-
-  /**
-   * A flag for ignoring the next lines.
-   */
-  ignoreNextLines: boolean;
-
-  /**
    * The ignored files.
    */
-  ignoreFiles: Ignore;
+  ignoreFiles: Ignore = ignore();
 
   /**
    * The included files.
    */
-  includeFiles: Ignore;
+  includeFiles: Ignore = ignore();
+
+  /**
+   *
+   */
+  errors: $ReadOnlyArray<string> = [];
+
+  /**
+   *
+   */
+  warnings: $ReadOnlyArray<string> = [];
+
+  /**
+   *
+   * @type {Array}
+   */
+  lines: $ReadOnlyArray<string> = [];
 
   /**
    * Initialize some constants.
@@ -58,96 +55,100 @@ export default class Parser {
    * Defaults to *.
    */
   constructor(options: Options) {
-    this.ignoreNextLines = false;
-    this.ignoreFiles = ignore().add(options.ignoreFiles);
-    this.includeFiles = ignore().add(options.includeFiles);
+    this.ignoreFiles.add(options.ignoreFiles);
+    this.includeFiles.add(options.includeFiles);
   }
 
-  /**
-   * Filter the errors from the stdout outputted by flow.
-   *
-   * @param {String} stdout - The stdout from flow.
-   * @returns {String[]} - Returns an array of errors.
-   */
-  filterErrors(stdout: string) {
-    log('Filtering errors');
-    const lines = stdout.split('\n');
+  parse(stdout: string) {
+    this.lines = stdout.split('\n');
 
-    return lines.reduce((errors, line) => {
-      if (/Found \d+ errors?/.test(line)) {
-        return this.handleErrorFoundCountLine(errors);
-      } else if (/(Error|Warning) -+/.test(line)) {
-        return this.handleNewErrorLine(errors, line, /Error -+ (.+):\d+:\d+/);
-      } else if (/(Error|Warning): /.test(line)) {
-        return this.handleNewErrorLine(errors, line, /Error: (.+):\d+/);
+    while (this.lines.length > 0) {
+      const line = this.getCurrentLine();
+
+      if (FOUND_ERRORS_REGEX.test(line)) {
+        this.lines = [];
+
+        // Stop the loop
+        break;
       }
 
-      return this.handleLine(errors, line);
-    }, []);
+      const match = line.match(ERROR_MATCHING_REGEX);
+
+      if (match) {
+        const [, type, file] = match;
+        const fileMatch = file.match(/^(.*?):/);
+
+        if (fileMatch) {
+          const lines = this.getErrorLines(line);
+
+          if (this.includeError(fileMatch[1].trim())) {
+            if (type === 'Error') {
+              this.addError(lines);
+            } else if (type === 'Warning') {
+              this.addWarning(lines);
+            } else {
+              log('Unknown type', type);
+            }
+          }
+        }
+      }
+    }
   }
 
-  /**
-   * Handle a new error. This will check if the path matches one of the globs
-   * from the ignored files and will then either add the error or ignore the lines
-   * till the next error comes.
-   *
-   * @param {String[]} errors - The array of errors.
-   * @param {String} line - The currently processed line.
-   * @param {Regex} regex - The regex to get the file path from.
-   * @returns {String[]} - Returns a new array of errors.
-   */
-  handleNewErrorLine(errors: $ReadOnlyArray<string>, line: string, regex: RegExp) {
-    const matches = line.match(regex);
-
-    if (!matches) {
-      this.ignoreNextLines = false;
-
-      return [
-        ...errors,
-        line,
-      ];
-    }
-
-    const filePath = matches[1];
-
-    // Ignore the error when the file path is in the ignored files
-    if (this.ignoreFiles.ignores(filePath)) {
-      log('Ignoring error in file:', filePath, 'because it\'s an ignored file');
-      this.ignoreNextLines = true;
-
-      return errors;
-    }
-
-    // Ignore the next lines when the file path isn't in the included files
-    this.ignoreNextLines = !this.includeFiles.ignores(filePath);
-
-    return this.ignoreNextLines ? errors : [
-      ...errors,
-      line,
+  addError(lines: $ReadOnlyArray<string>) {
+    this.errors = [
+      ...this.errors,
+      lines.join('\n'),
     ];
   }
 
-  /**
-   * This will be called when we find the error count provided by flow.
-   * We want to ignore every line afterwards because we provide our own error count.
-   *
-   * @param {String[]} errors - The errors.
-   * @returns {String[]} - It will just return the errors.
-   */
-  handleErrorFoundCountLine(errors: $ReadOnlyArray<string>) {
-    this.ignoreNextLines = true;
-
-    return errors;
+  addWarning(lines: $ReadOnlyArray<string>) {
+    this.warnings = [
+      ...this.warnings,
+      lines.join('\n'),
+    ];
   }
 
-  /**
-   * Check if we still ignore lines and elsewise just add the line to the last error.
-   *
-   * @param {String[]} errors - The errors array.
-   * @param {String} line - The current checked line.
-   * @returns {String[]} - Returns the new errors.
-   */
-  handleLine(errors: $ReadOnlyArray<string>, line: string) {
-    return this.ignoreNextLines ? errors : Parser.appendLine(errors, line);
+  getErrorLines(line: string) {
+    const lines = [line];
+
+    // Remove the lines until the next error or warning comes
+    while (!ERROR_MATCHING_REGEX.test(this.lines[0]) && !FOUND_ERRORS_REGEX.test(this.lines[0])) {
+      lines.push(this.getCurrentLine());
+    }
+
+    return lines;
+  }
+
+  includeError(filepath: string) {
+    // Ignore the error when the file path is in the ignored files
+    if (this.ignoreFiles.ignores(filepath)) {
+      log('Ignoring error in file:', filepath, 'because it\'s an ignored file');
+
+      return false;
+    }
+
+    if (!this.includeFiles.ignores(filepath)) {
+      log('Ignoring error in file:', filepath, 'because it\'s not an included file');
+
+      return false;
+    }
+
+    return true;
+  }
+
+  getCurrentLine() {
+    const [line, ...rest] = this.lines;
+
+    this.lines = rest;
+
+    return line;
+  }
+
+  getReport() {
+    return {
+      errors: this.errors,
+      warnings: this.warnings,
+    };
   }
 }
