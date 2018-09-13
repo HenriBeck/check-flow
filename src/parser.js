@@ -1,6 +1,7 @@
 // @flow strict-local
 
 import debug from 'debug';
+import stripAnsi from 'strip-ansi';
 import ignore, { type Ignore } from 'ignore';
 
 type Options = {
@@ -10,7 +11,7 @@ type Options = {
 
 const log = debug('check-flow:parser');
 
-const ERROR_MATCHING_REGEX = /(Error|Warning) [-┈]+ (.+):(\d*):(\d*)$/;
+const ERROR_MATCHING_REGEX = /^(Error|Warning) [-┈]+ (.+):(\d+):(\d+)/;
 const FOUND_ERRORS_REGEX = /Found \d+ errors?/;
 
 /**
@@ -66,14 +67,14 @@ export default class Parser {
     while (this.lines.length > 0) {
       const line = this.getCurrentLine();
 
-      if (FOUND_ERRORS_REGEX.test(line)) {
+      if (FOUND_ERRORS_REGEX.test(stripAnsi(line))) {
         this.lines = [];
 
         // Stop the loop
         break;
       }
 
-      const match = line.match(ERROR_MATCHING_REGEX);
+      const match = stripAnsi(line).match(ERROR_MATCHING_REGEX);
 
       if (match) {
         const [, type, file] = match;
@@ -106,7 +107,9 @@ export default class Parser {
   }
 
   getErrorLines(lines: $ReadOnlyArray<string>) {
-    if (ERROR_MATCHING_REGEX.test(this.lines[0]) || FOUND_ERRORS_REGEX.test(this.lines[0])) {
+    if (ERROR_MATCHING_REGEX.test(stripAnsi(this.lines[0]))
+      || FOUND_ERRORS_REGEX.test(stripAnsi(this.lines[0]))
+    ) {
       return lines;
     }
 
