@@ -1,6 +1,6 @@
 {
   "name": "check-flow",
-  "version": "1.1.0",
+  "version": "1.1.1-alpha.1",
   "description": "A better flow cli with ignoring files from node_modules",
   "main": "index.js",
   "license": "MIT",
@@ -26,6 +26,7 @@
     "debug": "4.0.1",
     "ignore": "5.0.2",
     "ora": "3.0.0",
+    "strip-ansi": "^4.0.0",
     "yargs": "12.0.2"
   },
   "devDependencies": {
