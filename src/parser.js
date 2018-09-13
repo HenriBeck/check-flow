@@ -10,7 +10,7 @@ type Options = {
 
 const log = debug('check-flow:parser');
 
-const ERROR_MATCHING_REGEX = /(Error|Warning) -+ (.+):(\d*):(\d*)$/;
+const ERROR_MATCHING_REGEX = /(Error|Warning) [-┈]+ (.+):(\d*):(\d*)$/;
 const FOUND_ERRORS_REGEX = /Found \d+ errors?/;
 
 /**
@@ -117,6 +117,8 @@ export default class Parser {
   }
 
   includeError(filepath: string) {
+    log('Found error in file:', filepath);
+
     // Ignore the error when the file path is in the ignored files
     if (this.ignoreFiles.ignores(filepath)) {
       log('Ignoring error in file:', filepath, 'because it\'s an ignored file');
