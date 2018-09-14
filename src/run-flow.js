@@ -39,9 +39,15 @@ export default function runFlow(flow: string, options: Options): Promise<string>
 
       output += `Found ${errors.length} error${errors.length === 1 ? '' : 's'}\n`;
 
-      return errors.length > 0 || options.maxWarnings >= warnings.length
-        ? reject(output)
-        : resolve(output);
+      if (errors.length > 0) {
+        return reject(output);
+      }
+
+      if (warnings.length > 0 && warnings.length >= options.maxWarnings) {
+        return reject(output);
+      }
+
+      return resolve(output);
     });
   });
 }
