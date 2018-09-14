@@ -15,6 +15,7 @@ const spinner = ora('Running flow');
 
 const argv = yargs
   .command('$0', 'Run flow check with ignoring errors and warnings from certain files')
+  .option('max-warnings', { default: Infinity })
   .version()
   .help()
   .argv;
@@ -31,6 +32,7 @@ async function run() {
     log('Running flow check');
 
     const output = await runFlow(flow, {
+      maxWarnings: parseInt(argv.maxWarnings, 10),
       includeFiles: argv._.length === 0 ? ['*'] : argv._,
       ignoreFiles,
       options: process.argv

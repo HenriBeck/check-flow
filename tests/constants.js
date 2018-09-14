@@ -20,18 +20,21 @@ export const multipleErrorsIgnoredFiles = [
 ];
 
 export const noErrorsOptions = {
+  maxWarnings: 0,
   ignoreFiles: [],
   includeFiles: ['tests/flow-test-files/no-errors.js'],
   options: ['--color=never'],
 };
 
 export const oneErrorOptions = {
+  maxWarnings: 0,
   ignoreFiles: [],
   includeFiles: ['tests/flow-test-files/one-error.js'],
   options: ['--color=never'],
 };
 
 export const multipleErrorsOptions = {
+  maxWarnings: 0,
   ignoreFiles: [],
   includeFiles: ['tests/flow-test-files/multiple-errors.js'],
   options: ['--color=never'],

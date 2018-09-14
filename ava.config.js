@@ -1,3 +1,5 @@
+// @flow
+
 export default {
   verbose: true,
   cache: true,
