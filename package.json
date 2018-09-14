@@ -11,7 +11,7 @@
     "build": "babel src -d bin",
     "preflow": "yarn run build",
     "flow": "node ./bin/index.js --color=always",
-    "lint": "eslint src/ tests/ flow-typed/",
+    "lint": "eslint .",
     "prepare": "yarn run build"
   },
   "files": [
