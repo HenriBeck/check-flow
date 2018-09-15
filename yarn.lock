@@ -1884,13 +1884,13 @@ eslint-ast-utils@^1.0.0:
     lodash.get "^4.4.2"
     lodash.zip "^4.2.0"
 
-eslint-config-henribeck@5.5.0:
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-henribeck/-/eslint-config-henribeck-5.5.0.tgz#2958b37a131e5e4c80aeb47a4f0f5cd2d4bc1cb1"
+eslint-config-henribeck@5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-henribeck/-/eslint-config-henribeck-5.6.0.tgz#a0a435b57913893689357c6942b843b1c6d91117"
   dependencies:
     babel-eslint "9.0.0"
     eslint-import-resolver-node "0.3.2"
-    eslint-plugin-ava "5.1.0"
+    eslint-plugin-ava "5.1.1"
     eslint-plugin-eslint-comments "3.0.1"
     eslint-plugin-filenames "1.3.2"
     eslint-plugin-flowtype "2.50.0"
@@ -1898,9 +1898,9 @@ eslint-config-henribeck@5.5.0:
     eslint-plugin-import "2.14.0"
     eslint-plugin-json "1.2.1"
     eslint-plugin-markdown "1.0.0-beta.8"
-    eslint-plugin-promise "4.0.0"
+    eslint-plugin-promise "4.0.1"
     eslint-plugin-react "7.11.1"
-    eslint-plugin-unicorn "6.0.0"
+    eslint-plugin-unicorn "6.0.1"
 
 eslint-import-resolver-node@0.3.2, eslint-import-resolver-node@^0.3.1:
   version "0.3.2"
@@ -1916,16 +1916,16 @@ eslint-module-utils@^2.2.0:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-ava@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ava/-/eslint-plugin-ava-5.1.0.tgz#885e6bcd1124c08bb8f3ef721600174e25af40a3"
+eslint-plugin-ava@5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ava/-/eslint-plugin-ava-5.1.1.tgz#709a03f6c56f9f316d83ebc739952cc28cea979a"
   dependencies:
     arrify "^1.0.1"
     deep-strict-equal "^0.2.0"
     enhance-visitors "^1.0.0"
-    esm "^3.0.71"
+    esm "^3.0.82"
     espree "^4.0.0"
-    espurify "^1.5.0"
+    espurify "^1.8.1"
     import-modules "^1.1.0"
     is-plain-object "^2.0.4"
     multimatch "^2.1.0"
@@ -1991,9 +1991,9 @@ eslint-plugin-markdown@1.0.0-beta.8:
     remark-parse "^3.0.0"
     unified "^6.1.2"
 
-eslint-plugin-promise@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-4.0.0.tgz#bc15a4aa04fa6116113b6c47488c421821b758fc"
+eslint-plugin-promise@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-4.0.1.tgz#2d074b653f35a23d1ba89d8e976a985117d1c6a2"
 
 eslint-plugin-react@7.11.1:
   version "7.11.1"
@@ -2005,9 +2005,9 @@ eslint-plugin-react@7.11.1:
     jsx-ast-utils "^2.0.1"
     prop-types "^15.6.2"
 
-eslint-plugin-unicorn@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-unicorn/-/eslint-plugin-unicorn-6.0.0.tgz#af24ab13f4654865832c78d1a7fc5b0d7de6d30a"
+eslint-plugin-unicorn@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-unicorn/-/eslint-plugin-unicorn-6.0.1.tgz#4a97f0bc9449e20b82848dad12094ee2ba72347e"
   dependencies:
     clean-regexp "^1.0.0"
     eslint-ast-utils "^1.0.0"
@@ -2083,13 +2083,13 @@ eslint@5.6.0:
     table "^4.0.3"
     text-table "^0.2.0"
 
-esm@^3.0.71:
-  version "3.0.71"
-  resolved "https://registry.yarnpkg.com/esm/-/esm-3.0.71.tgz#3824987412d7d8fd7782d2381e990a621519a993"
-
 esm@^3.0.80:
   version "3.0.80"
   resolved "https://registry.yarnpkg.com/esm/-/esm-3.0.80.tgz#234c56d1509ff6246e26cd3aeccfa1d377517d6b"
+
+esm@^3.0.82:
+  version "3.0.82"
+  resolved "https://registry.yarnpkg.com/esm/-/esm-3.0.82.tgz#e8c4363a14e30936bedf49a44bf962e2c91866ff"
 
 espower-location-detector@^1.0.0:
   version "1.0.0"
@@ -2111,9 +2111,15 @@ esprima@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
 
-espurify@^1.5.0, espurify@^1.6.0:
+espurify@^1.6.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/espurify/-/espurify-1.8.0.tgz#270d8046e4e47e923d75bc8a87357c7112ca8485"
+  dependencies:
+    core-js "^2.0.0"
+
+espurify@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/espurify/-/espurify-1.8.1.tgz#5746c6c1ab42d302de10bd1d5bf7f0e8c0515056"
   dependencies:
     core-js "^2.0.0"
 
@@ -2372,9 +2378,13 @@ flat-cache@^1.2.1:
   version "0.79.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.79.0.tgz#a7029f2832d45e5b78f7e77a74fee898722fb6ef"
 
-flow-bin@0.80.0:
+"flow-0.80.0@npm:flow-bin@0.80.0":
   version "0.80.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.80.0.tgz#04cc1ee626a6f50786f78170c92ebe1745235403"
+
+flow-bin@0.81.0:
+  version "0.81.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.81.0.tgz#7f0a733dce1dad3cb1447c692639292dc3d60bf5"
 
 for-in@^1.0.2:
   version "1.0.2"
