@@ -3,42 +3,25 @@
 import test from 'ava';
 import flow from 'flow-0.80.0';
 
-import runFlow from '../src/run-flow';
-
 import {
-  noErrorsOptions,
-  oneErrorOptions,
-  multipleErrorsOptions,
-} from './constants';
+  testWithIgnoredFilesAndMultipleErrors,
+  testWithIgnoredFilesAndOneError,
+  testWithIgnoredFilesAndZeroErrors,
+  testWithIncludedFilesAndMultipleErrors,
+  testWithIncludedFilesAndOneError,
+  testWithIncludedFilesAndZeroErrors,
+} from './test-factories';
 
-test('flow 0.80.0: no errors', async (t) => {
-  const result = await runFlow(flow, noErrorsOptions);
+const version = '0.80.0';
 
-  t.snapshot(result);
+test(testWithIncludedFilesAndZeroErrors, flow, version);
 
-  t.true(result.includes('Found 0 errors'));
-});
+test(testWithIncludedFilesAndOneError, flow, version);
 
-test('flow 0.80.0: one error', async (t) => {
-  try {
-    const res = await runFlow(flow, oneErrorOptions);
+test(testWithIncludedFilesAndMultipleErrors, flow, version);
 
-    t.fail(res);
-  } catch (error) {
-    t.snapshot(error);
+test(testWithIgnoredFilesAndZeroErrors, flow, version);
 
-    t.true(error.includes('Found 1 error'));
-  }
-});
+test(testWithIgnoredFilesAndOneError, flow, version);
 
-test('flow 0.80.0: multiple errors', async (t) => {
-  try {
-    const res = await runFlow(flow, multipleErrorsOptions);
-
-    t.fail(res);
-  } catch (error) {
-    t.snapshot(error);
-
-    t.true(error.includes('Found 2 errors'));
-  }
-});
+test(testWithIgnoredFilesAndMultipleErrors, flow, version);

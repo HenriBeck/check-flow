@@ -31,18 +31,17 @@ export default class Parser {
   includeFiles: Ignore = ignore();
 
   /**
-   *
+   * The actual errors which should be included.
    */
   errors: $ReadOnlyArray<string> = [];
 
   /**
-   *
+   * The actual warnings which should be included.
    */
   warnings: $ReadOnlyArray<string> = [];
 
   /**
-   *
-   * @type {Array}
+   * The lines which are currently being processed.
    */
   lines: $ReadOnlyArray<string> = [];
 
@@ -107,9 +106,10 @@ export default class Parser {
   }
 
   getErrorLines(lines: $ReadOnlyArray<string>) {
-    if (ERROR_MATCHING_REGEX.test(stripAnsi(this.lines[0]))
-      || FOUND_ERRORS_REGEX.test(stripAnsi(this.lines[0]))
-    ) {
+    const isNextError = ERROR_MATCHING_REGEX.test(stripAnsi(this.lines[0]));
+    const isFoundErrorsLine = FOUND_ERRORS_REGEX.test(stripAnsi(this.lines[0]));
+
+    if (isNextError || isFoundErrorsLine) {
       return lines;
     }
 
